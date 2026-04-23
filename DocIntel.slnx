@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/SolutionItems/">
+    <File Path=".gitignore" />
     <File Path="document_pdf.pdf" />
     <File Path="README.md" />
   </Folder>
@@ -7,6 +8,9 @@
     <Project Path="DocIntel.Api/DocIntel.Api.csproj" />
     <Project Path="DocIntel.Application/DocIntel.Application.csproj" />
     <Project Path="DocIntel.Domain/DocIntel.Domain.csproj" />
-    <Project Path="DocIntel.Infrastructure/DocIntel.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/DocIntel.Infrastructure/">
+    <Project Path="CompositionRoot/CompositionRoot.csproj" />
+    <Project Path="DocIntel.Database/DocIntel.Database.csproj" />
   </Folder>
 </Solution>

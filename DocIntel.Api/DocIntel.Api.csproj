@@ -8,11 +8,16 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CompositionRoot\CompositionRoot.csproj" />
       <ProjectReference Include="..\DocIntel.Application\DocIntel.Application.csproj" />
-      <ProjectReference Include="..\DocIntel.Infrastructure\DocIntel.Infrastructure.csproj" />
+      <ProjectReference Include="..\DocIntel.Database\DocIntel.Database.csproj" />
     </ItemGroup>
 
 </Project>
