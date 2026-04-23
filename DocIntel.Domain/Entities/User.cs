@@ -10,5 +10,5 @@ public class User : Entity
     
     public bool IsVerified { get; set; }
     
-    public ICollection<Document> Documents { get; set; } = new List<Document>();
+    public ICollection<DocIntelDocument> DocIntelDocuments { get; set; } = new List<DocIntelDocument>();
 }
