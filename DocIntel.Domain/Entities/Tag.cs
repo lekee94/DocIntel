@@ -5,5 +5,7 @@ public class Tag : Entity
     //TODO: maybe enum?
     public string Name { get; set; } = null!;
     
-    public ICollection<Document> Documents { get; set; } = new List<Document>();
+    public ICollection<DocIntelDocument> DocIntelDocuments { get; set; } = new List<DocIntelDocument>();
+    
+    public ICollection<DocumentTag> DocumentTags { get; set; } = new List<DocumentTag>();
 }

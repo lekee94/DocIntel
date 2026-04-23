@@ -38,3 +38,4 @@ TestResults/
 coverage/
 *.coverage
 *.coveragexml
+/.claude/settings.local.json

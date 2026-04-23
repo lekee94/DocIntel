@@ -1,18 +1,15 @@
 ﻿using DocIntel.Database;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CompositionRoot;
+namespace CompositionRoot.ServiceCollectionExtensions;
 
 public static class DatabaseServiceCollectionExtensions
 {
-    public static IServiceCollection AddDatabase(this IServiceCollection services)
+    public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<AppDbContext>(options =>
-        {
-            options.UseSqlite("Server=NTB-368;Database=DocIntel;Trusted_Connection=True;TrustServerCertificate=True;");
-        });
-
-        return services;
+            options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
     }
 }
