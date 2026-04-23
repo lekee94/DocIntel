@@ -39,5 +39,8 @@ coverage/
 *.coverage
 *.coveragexml
 /.claude/settings.local.json
-/DocIntel.Api/docintel.db-shm
-/DocIntel.Api/docintel.db-wal
+
+# DB
+*.db
+*.db-shm
+*.db-wal
