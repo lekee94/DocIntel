@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DocIntel.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d617aba30be2ceb396442fd253f0d0af266afe0")]
 [assembly: System.Reflection.AssemblyProductAttribute("DocIntel.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DocIntel.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
