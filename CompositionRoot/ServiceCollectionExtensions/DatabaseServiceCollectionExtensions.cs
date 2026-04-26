@@ -1,4 +1,7 @@
-﻿using DocIntel.Database;
+﻿using DocIntel.Application.DocIntelDocuments;
+using DocIntel.Application.Users;
+using DocIntel.Database;
+using DocIntel.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,5 +14,9 @@ public static class DatabaseServiceCollectionExtensions
     {
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+        
+        //Repositories
+        services.AddScoped<IDocIntelDocumentRepository, DocIntelDocumentRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
     }
 }
