@@ -25,3 +25,15 @@ public record Error(string Code, string Message)
     public static Error Validation(string message) => new("Validation", message);
     public static Error Conflict(string message) => new("Conflict", message);
 }
+
+public class Result
+{
+    public Error Error { get; }
+    public bool IsSuccess => Error == Error.None;
+    public bool IsFailure => !IsSuccess;
+
+    protected Result(Error error) => Error = error;
+
+    public static Result Success() => new(Error.None);
+    public static Result Failure(Error error) => new(error);
+}

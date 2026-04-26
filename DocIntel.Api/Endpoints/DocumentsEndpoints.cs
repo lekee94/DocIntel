@@ -1,5 +1,8 @@
+using DocIntel.Application.Common;
+using DocIntel.Application.DocIntelDocuments.Commands.DeleteDocIntelDocument;
 using DocIntel.Application.DocIntelDocuments.Commands.UploadDocIntelDocument;
 using DocIntel.Application.DocIntelDocuments.Queries.GetDocIntelDocument;
+using DocIntel.Application.DocIntelDocuments.Queries.ListDocIntelDocuments;
 using MediatR;
 
 namespace DocIntel.Api.Endpoints;
@@ -24,6 +27,18 @@ public static class DocumentsEndpoints
             .WithSummary("Get a single document by ID")
             .Produces<DocumentDto>()
             .Produces(StatusCodes.Status404NotFound);
+        
+        group.MapGet("/", GetPagedDocuments)
+            .WithName("GetPagedDocuments")
+            .WithSummary("Get a page of user documents")
+            .Produces<PagedList<DocumentDto>>()
+            .Produces(StatusCodes.Status404NotFound);
+        
+        group.MapDelete("/{id:guid}", DeleteDocument)
+            .WithName("DeleteDocument")
+            .WithSummary("Delete a document by ID")
+            .Produces(StatusCodes.Status204NoContent)
+            .Produces(StatusCodes.Status404NotFound);
     }
     
     private static async Task<IResult> UploadDocument(
@@ -41,7 +56,7 @@ public static class DocumentsEndpoints
                 _ => Results.Problem(result.Error.Message)
             };
     }
-
+    
     private static async Task<IResult> GetDocument(
         Guid id,
         ISender sender,
@@ -51,5 +66,35 @@ public static class DocumentsEndpoints
         return result.IsSuccess
             ? Results.Ok(result.Value)
             : Results.NotFound(result.Error);
+    }
+    
+    private static async Task<IResult> GetPagedDocuments(
+        Guid userId,     
+        int page,
+        int pageSize,
+        ISender sender,
+        CancellationToken ct)
+    {
+        var result = await sender.Send(new ListDocIntelDocumentsQuery(userId, page, pageSize), ct);
+        return result.IsSuccess
+            ? Results.Ok(result.Value)
+            : Results.NotFound(result.Error);
+    }
+    
+    private static async Task<IResult> DeleteDocument(
+        Guid id,
+        ISender sender,
+        CancellationToken ct)
+    {
+        var result = await sender.Send(new DeleteDocIntelDocumentCommand(id), ct);
+        
+        if (result.IsSuccess)
+            return Results.NoContent();
+        
+        return result.Error.Code switch
+        {
+            "NotFound" => Results.NotFound(result.Error),
+            _          => Results.Problem(result.Error.Message)
+        };
     }
 }
